@@ -1,0 +1,231 @@
+Use NUnit and Moq to Test an OOP Based System for Storing School Data
+
+Github: https://github.com/sundershyam04/Phase-4-Nunit-SchoolOOPS-Practice-Project.git
+
+------------------------------SOURCECODE--------------------------------------------
+
+SchooldataTests.cs
+
+
+using NUnit.Framework;
+using SchoolOOPS;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace NUnit.Tests
+{
+    [TestFixture]
+    public class SchoolDataTests
+    {
+        Student s = new Student();
+
+        Subject sub = new Subject();
+
+        Teacher ts = new Teacher();
+        
+        [TestCase("Ravi",ExpectedResult =true)]
+        [TestCase("Sathiya",ExpectedResult =false)]
+        [TestCase("ganga",ExpectedResult =false)]
+        [TestCase("nandini",ExpectedResult =false)]
+        [TestCase("gnanasekar",ExpectedResult =false)]
+        public bool IsName(string search)
+        {
+
+            return s.Search(search);
+
+        }
+
+        [TestCase("Maths",ExpectedResult =true)]
+        [TestCase("Science",ExpectedResult =true)]
+        [TestCase("Biology",ExpectedResult =false)]
+        [TestCase("English",ExpectedResult =true)]
+        public bool IsSubject(string subj)
+        {
+
+            return sub.Search(subj);
+
+        }
+
+        [TestCase("Ram",ExpectedResult =true)]
+        [TestCase("Sakthi",ExpectedResult =true)]
+        [TestCase("Ganesh",ExpectedResult =true)]
+        [TestCase("malaiyan",ExpectedResult =false)]
+        public bool IsTeacher(string t)
+        {
+
+            return ts.Search(t);
+
+        }
+
+
+    }
+}
+--------------
+
+Schooloops
+Student.cs
+
+using SchoolOOPS;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SchoolOOPS
+{
+	public class Student
+	{
+
+		private string _name;
+
+		public string Name
+		{
+			get { return _name; }
+			set { _name = value; }
+		}
+
+		private int _class;
+
+		public int Class
+		{
+			get { return _class; }
+			set { _class = value; }
+		}
+
+		private char _section;
+
+		public char Section
+		{
+			get { return _section; }
+			set { _section = value; }
+		}
+
+		//public Student(string n, int c, char s)
+		//{
+		//	Name = n;
+		//	Class = c;
+		//	Section = s;
+
+		//}
+
+		public bool Search(string s)
+		{
+			List<Student> students = new List<Student>();
+
+			students.Add(new Student { Name = "Ravi", Class = 5, Section = 'D' });
+			students.Add(new Student { Name = "Satvika", Class = 10, Section = 'B' });
+			students.Add(new Student { Name = "Sakran", Class = 7, Section = 'C' });
+
+            var isfound = students.Find(d => d.Name == s);
+            return isfound != null;
+        }
+	}
+}
+------------------------
+
+subject.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SchoolOOPS
+{
+    public class Subject
+    {
+
+		private string _subname;
+
+		public string Name
+		{
+			get { return _subname; }
+			set { _subname = value; }
+		}
+
+		private string _subCode;
+
+		public string SubCode
+		{
+			get { return _subCode; }
+			set { _subCode = value; }
+		}
+
+        //public Subject(string n, string c)
+        //{
+        //	Name = n;
+        //	SubCode = c;
+
+        //}
+
+        public bool Search(string s)
+        {
+            List<Subject> sublist = new List<Subject>();
+
+            sublist.Add( new Subject { Name = "Maths", SubCode="512b"});
+            sublist.Add( new Subject { Name = "Science", SubCode="513b"});
+            sublist.Add( new Subject { Name = "English", SubCode="514b"});
+
+            
+
+            var isfound = sublist.Find(d => d.Name == s);
+            return isfound != null;
+        }
+
+    }
+}
+---------------------------
+Teacher.cs
+	using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SchoolOOPS
+{
+    public class Teacher
+    {
+
+        private string _name;
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+
+
+        private string _subject;
+
+		public string Subject
+		{
+			get { return _subject; }
+			set { _subject = value; }
+		}
+
+        //public Teacher(string name, string subject)
+        //{
+        //	Name = name;
+        //	Subject = subject;
+        //}
+
+        public bool Search(string s)
+        {
+            List<Teacher> teachlist = new List<Teacher>();
+
+            teachlist.Add(new Teacher { Name = "Sakthi", Subject = "Maths" });
+            teachlist.Add(new Teacher { Name = "Ram", Subject = "English" });
+            teachlist.Add(new Teacher { Name = "Ganesh", Subject = "Science" });
+
+            var isfound = teachlist.Find(d => d.Name == s);
+            return isfound != null;
+        }
+
+    }
+}
+-----------------------

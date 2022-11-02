@@ -1,0 +1,20 @@
+Use NUnit and Moq to Test an OOP Based System for Storing School Data
+
+Github: https://github.com/sundershyam04/Phase-4-Nunit-SchoolOOPS-Practice-Project.git
+
+------------------------------WRITEUP--------------------------------------------
+
+1) create 2 class library .net project 
+
+2) one for School data oops contains student, subject and teacher classes and their data
+
+3) Other one for NUnit testing purpose
+
+4) Install NUnit test adapter and nunit framework packages from NuGet package downloader in the nunit project library
+
+5) create testcases for student, subject , teacher classes 
+
+6) Run the tests in TestExplorer and check for the correctness in functionality
+
+7) thus schooldataoops project is tested using NUnit framework
+
